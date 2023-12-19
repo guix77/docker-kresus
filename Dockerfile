@@ -1,4 +1,4 @@
-FROM node:16-bullseye-slim
+FROM node:18-bookworm-slim
 LABEL maintainer="Thomas Lemarchand"
 
 COPY woob_version /tmp/woob_version
@@ -19,8 +19,8 @@ RUN apt-get update && \
     update-locale C.UTF-8 && \
     update-alternatives --install /usr/bin/python python $(which python3) 1 && \
     mkdir -p /var/lib/kresus && \
-    pip install --upgrade setuptools && \
-    pip install simplejson BeautifulSoup4 PyExecJS typing-extensions pdfminer.six Pillow woob==`cat /tmp/woob_version` && \
+    pip install --break-system-packages --upgrade setuptools && \
+    pip install --break-system-packages simplejson BeautifulSoup4 PyExecJS typing-extensions pdfminer.six Pillow woob==`cat /tmp/woob_version` && \
     yarn global add kresus@`cat /tmp/kresus_version` --prefix /opt/kresus --production  && \
     apt-get purge -y python3-pip rustc build-essential && \
     apt-get autoremove --purge -y && \
