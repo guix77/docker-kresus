@@ -18,7 +18,6 @@ RUN apt-get update && \
     locale-gen C.UTF-8 && \
     update-locale C.UTF-8 && \
     update-alternatives --install /usr/bin/python python $(which python3) 1 && \
-    groupadd -g 900 -r kresus && useradd --no-log-init -u 900 -r -g kresus kresus && \
     mkdir -p /var/lib/kresus && \
     pip install --upgrade setuptools && \
     pip install simplejson BeautifulSoup4 PyExecJS typing-extensions pdfminer.six Pillow woob==`cat /tmp/woob_version` && \
@@ -35,7 +34,7 @@ ENV KRESUS_DIR /var/lib/kresus
 ENV NODE_ENV production
 ENV KRESUS_PYTHON_EXEC python3
 
-USER kresus
+USER node
 VOLUME /var/lib/kresus
 EXPOSE 9876
 
